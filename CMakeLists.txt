@@ -27,6 +27,7 @@ set(NULL_ENTROPY_WARNING "${WARNING_BORDER}"
                          "${NULL_ENTROPY_WARN_L3}"
                          "${WARNING_BORDER}")
 
+if( TS_MBEDTLS_DYNAMIC_CONFIGURATION_ON )
 find_package(Perl)
 if(PERL_FOUND)
 
@@ -50,6 +51,7 @@ option: \n\
             return()
         endif()
     endif()
+endif()
 endif()
 
 set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE}
