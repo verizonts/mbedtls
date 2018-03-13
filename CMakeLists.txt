@@ -27,6 +27,7 @@ set(NULL_ENTROPY_WARNING "${WARNING_BORDER}"
                          "${NULL_ENTROPY_WARN_L3}"
                          "${WARNING_BORDER}")
 
+if( TS_MBEDTLS_DYNAMIC_CONFIGURATION_ON )
 find_package(Perl)
 if(PERL_FOUND)
 
@@ -51,6 +52,7 @@ option: \n\
         endif()
     endif()
 endif()
+endif()
 
 set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE}
     CACHE STRING "Choose the type of build: None Debug Release Coverage ASan ASanDbg MemSan MemSanDbg Check CheckFull"
@@ -70,7 +72,7 @@ if(CMAKE_COMPILER_IS_GNUCC)
     if (GCC_VERSION VERSION_GREATER 4.8 OR GCC_VERSION VERSION_EQUAL 4.8)
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wshadow")
     endif()
-    set(CMAKE_C_FLAGS_RELEASE     "-O2")
+    set(CMAKE_C_FLAGS_RELEASE     "-O2 -flto -fdata-sections -ffunction-sections")
     set(CMAKE_C_FLAGS_DEBUG       "-O0 -g3")
     set(CMAKE_C_FLAGS_COVERAGE    "-O0 -g3 --coverage")
     set(CMAKE_C_FLAGS_ASAN        "-Werror -fsanitize=address -fno-common -O3")
